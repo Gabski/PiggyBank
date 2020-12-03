@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Project</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body{
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">PiggyBank</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/">Pulpit</a></li>
+                <li><a href="/history">Historia</a></li>
+                <li><a href="/application">Wnioski</a></li>
+                <li><a href="/account">Konto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="/">Pulpit</a></li>
+</ul>
+
+
+<nav>
+    <div class="container">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="#!" class="breadcrumb">Pulpit</a>
+                <a href="#!" class="breadcrumb">Statystyki</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+    });
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
+</script>
+</body>
+</html>

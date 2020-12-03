@@ -1,0 +1,12 @@
+<div th:fragment="breadcrumb(param1, param2)" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav>
+    <div class="container">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">PiggyBank</a>
+                <a  class="breadcrumb" th:href="${param1}">[[${param2}]]</a>
+            </div>
+        </div>
+    </div>
+</nav>
+</div>
