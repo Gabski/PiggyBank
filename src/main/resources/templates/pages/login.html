@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Wnioski</title>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <div th:replace="~{layout/breadcrumb :: breadcrumb('/application', 'Wnioski')}"></div>
+</div>
+<div class="hero-unit" layout:fragment="content">
+
+    <form action="/login" method="POST" class="form-signin">
+        <h3 class="form-signin-heading">LOGIN PAGE</h3>
+
+                <br/>
+                <div align="center" th:if="${param.error}">
+                    <p style="font-size: 20px; color: #FF1C19;">Username or password is invalid</p>
+                </div>
+
+        <input type="text" id="username" name="username" placeholder="Username or email"
+               class="form-control"/> <br/>
+        <input type="password" placeholder="Password"
+               id="password" name="password" class="form-control"/> <br/>
+
+
+        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>
