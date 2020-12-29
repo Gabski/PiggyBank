@@ -9,9 +9,11 @@ import piggy.bank.domain.AuthorityType;
 import piggy.bank.entity.Currency;
 import piggy.bank.entity.Role;
 import piggy.bank.entity.User;
+import piggy.bank.repository.AccountRepository;
 import piggy.bank.repository.CurrencyRepository;
 import piggy.bank.repository.RoleRepository;
 import piggy.bank.repository.UserRepository;
+import piggy.bank.service.RoleServiceInterface;
 
 @Configuration
 public class StartData {
@@ -25,20 +27,28 @@ public class StartData {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
     @Bean
-    InitializingBean init() {
+    InitializingBean init(RoleServiceInterface roleService) {
         return () -> {
             insertCurrency();
             insertRole();
-            insertUsers();
+            insertUsers(roleService);
         };
     }
 
     private void insertCurrency() {
         if (currencyRepository.findAll().isEmpty()) {
-            currencyRepository.save(Currency.initCurrency("Złoty polski", "PLN"));
-            currencyRepository.save(Currency.initCurrency("Dolar Amerykański", "USD"));
-            currencyRepository.save(Currency.initCurrency("Frank San Eskobarski", "FCK"));
+            currencyRepository.save(Currency.create("Złoty polski", "PLN"));
+            currencyRepository.save(Currency.create("Dolar Amerykański", "USD"));
+            currencyRepository.save(Currency.create("Euro", "EUR"));
+            currencyRepository.save(Currency.create("Funt brytyjski", "GBP"));
+            currencyRepository.save(Currency.create("Frank szwajcarski", "CHF"));
+            currencyRepository.save(Currency.create("Ruble", "RUB"));
+            currencyRepository.save(Currency.create("Dolar australijski", "AUD"));
+            currencyRepository.save(Currency.create("Frank San Eskobarski", "FSE"));
             currencyRepository.flush();
         }
     }
@@ -46,11 +56,8 @@ public class StartData {
     private void insertRole() {
         if (roleRepository.findAll().isEmpty()) {
 
-            Role roleAdmin = new Role();
-            roleAdmin.setRoleName(AuthorityType.ROLE_ADMIN.name());
-
-            Role roleUser = new Role();
-            roleUser.setRoleName(AuthorityType.ROLE_USER.name());
+            Role roleUser = Role.create(AuthorityType.ROLE_USER.name());
+            Role roleAdmin = Role.create(AuthorityType.ROLE_ADMIN.name());
 
             roleRepository.save(roleAdmin);
             roleRepository.save(roleUser);
@@ -58,10 +65,11 @@ public class StartData {
         }
     }
 
-    private void insertUsers() {
+    private void insertUsers(RoleServiceInterface roleService) {
         if (userRepository.findAll().isEmpty()) {
 
-            Role roleUser = roleRepository.findByName(AuthorityType.ROLE_USER.name());
+            Role roleUser = roleService.getUserRole();
+            Role roleAdmin = roleService.getAdminRole();
 
             User user = new User();
             user.setPassword(bCryptPasswordEncoder().encode("user"));
@@ -71,10 +79,21 @@ public class StartData {
             user.setUsername("user");
             user.setRole(roleUser);
 
+            User admin = new User();
+            admin.setPassword(bCryptPasswordEncoder().encode("admin"));
+            admin.setFirstName("Gabriel");
+            admin.setLastName("Koziestański");
+            admin.setEmail("admin@wp.pl");
+            admin.setUsername("admin");
+            admin.setRole(roleAdmin);
+
             userRepository.save(user);
+            userRepository.save(admin);
             userRepository.flush();
         }
+
     }
+
 
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

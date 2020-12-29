@@ -18,6 +18,12 @@ public class Role implements Serializable {
     @Column(name = "role_name", length = 65)
     private String roleName;
 
+    public static Role create(String name) {
+        Role role = new Role();
+        role.setRoleName(name);
+        return role;
+    }
+
     public Integer getId() {
         return id;
     }

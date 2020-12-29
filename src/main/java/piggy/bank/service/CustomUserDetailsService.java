@@ -19,7 +19,7 @@ import piggy.bank.entity.User;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserServiceInterface userService;
 
     @Override
     @Transactional(readOnly = true)

@@ -4,9 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piggy.bank.repository.AccountHistoryRecordRepository;
-import piggy.bank.repository.AccountRepository;
-
-import java.util.Optional;
+import piggy.bank.repository.AccountRepository2;
 
 
 @Controller
@@ -14,7 +12,7 @@ public class DashboardController extends AppController {
     @GetMapping({"/dashboard"})
     public String show(Model model) {
 
-        AccountRepository accountRepository = new AccountRepository();
+        AccountRepository2 accountRepository = new AccountRepository2();
         AccountHistoryRecordRepository accountHistoryRecordRepository = new AccountHistoryRecordRepository();
 
         int size = accountHistoryRecordRepository.size();

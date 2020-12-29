@@ -19,7 +19,7 @@ public class Currency implements Serializable {
     @Column(name = "slug")
     private String slug;
 
-    public static Currency initCurrency(String name, String slug) {
+    public static Currency create(String name, String slug) {
         Currency currency = new Currency();
         currency.setName(name);
         currency.setSlug(slug);
