@@ -51,7 +51,7 @@ public class User implements Serializable {
     @Column(name = "email", unique = true, length = 115)
     private String email;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
 

@@ -104,6 +104,10 @@ public class StartData {
 
             Account account = Account.create(user, currency);
 
+            Currency currency2 = currencyRepository.findBySlug("USD");
+            Account account2 = Account.create(user, currency2);
+
+            accountRepository.save(account2);
             accountRepository.save(account);
             accountRepository.flush();
         }
