@@ -71,10 +71,10 @@ public class StartData {
             Role roleAdmin = roleService.getAdminRole();
 
             Currency currency = currencyRepository.findBySlug("PLN");
-            Currency currency2 = currencyRepository.findBySlug("USD");
 
             Account account = Account.create(currency);
-            Account account2 = Account.create(currency2);
+            Account account2 = Account.create(currency);
+            Account account3 = Account.create(currency);
 
 
 
@@ -98,12 +98,14 @@ public class StartData {
             admin.setUsername("admin");
             admin.setRole(roleAdmin);
 
+            admin.addAccount(account3);
+
             userRepository.save(user);
             userRepository.save(admin);
             userRepository.flush();
 
 
-            historyRecordRepository.save(HistoryRecord.create(account, account2, (float) 100.02, "test1"));
+            historyRecordRepository.save(HistoryRecord.create(account, account3, (float) 100.02, "test1"));
             historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.20, "test1"));
             historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "test1"));
             historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 1200.00, "test1"));

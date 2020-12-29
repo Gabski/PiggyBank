@@ -51,6 +51,7 @@ public class HistoryRecord implements Serializable {
         historyRecord.setTo(to);
         historyRecord.setValue(value);
         historyRecord.setTitle(title);
+        historyRecord.setCreateAt(LocalDate.now());
 
         return historyRecord;
     }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public class HistoryService {
 
+
+
     static public float getSum(List<AccountHistoryRecord> records) {
         float sum = 0;
 
