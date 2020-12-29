@@ -21,6 +21,15 @@ public class Account implements Serializable {
     @JoinColumn(name = "currency_id")
     private Currency currency;
 
+
+    public static Account create(User user, Currency currency) {
+        Account account = new Account();
+        account.setUser(user);
+        account.setCurrency(currency);
+        return account;
+    }
+
+
     public Long getId() {
         return id;
     }

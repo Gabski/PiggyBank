@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import piggy.bank.domain.AuthorityType;
+import piggy.bank.entity.Account;
 import piggy.bank.entity.Currency;
 import piggy.bank.entity.Role;
 import piggy.bank.entity.User;
@@ -36,6 +37,7 @@ public class StartData {
             insertCurrency();
             insertRole();
             insertUsers(roleService);
+            insertAccounts();
         };
     }
 
@@ -92,6 +94,19 @@ public class StartData {
             userRepository.flush();
         }
 
+    }
+
+    private void insertAccounts() {
+        if (accountRepository.findAll().isEmpty()) {
+
+            User user = userRepository.findByUsernameOrEmail("user");
+            Currency currency = currencyRepository.findBySlug("PLN");
+
+            Account account = Account.create(user, currency);
+
+            accountRepository.save(account);
+            accountRepository.flush();
+        }
     }
 
 
