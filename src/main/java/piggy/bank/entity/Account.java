@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
@@ -16,10 +17,6 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "currency_id")
@@ -32,9 +29,8 @@ public class Account implements Serializable {
     @Column(name = "bank_number")
     private String bankNumber;
 
-    public static Account create(User user, Currency currency) {
+    public static Account create(Currency currency) {
         Account account = new Account();
-        account.setUser(user);
         account.setCurrency(currency);
         account.setBankNumber(Account.randomBankNumber());
         return account;
@@ -63,13 +59,6 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Currency getCurrency() {
         return currency;

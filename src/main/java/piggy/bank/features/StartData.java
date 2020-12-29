@@ -6,14 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import piggy.bank.domain.AuthorityType;
-import piggy.bank.entity.Account;
-import piggy.bank.entity.Currency;
-import piggy.bank.entity.Role;
-import piggy.bank.entity.User;
-import piggy.bank.repository.AccountRepository;
-import piggy.bank.repository.CurrencyRepository;
-import piggy.bank.repository.RoleRepository;
-import piggy.bank.repository.UserRepository;
+import piggy.bank.entity.*;
+import piggy.bank.repository.*;
 import piggy.bank.service.RoleServiceInterface;
 
 @Configuration
@@ -31,13 +25,16 @@ public class StartData {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private HistoryRecordRepository historyRecordRepository;
+
     @Bean
     InitializingBean init(RoleServiceInterface roleService) {
         return () -> {
             insertCurrency();
             insertRole();
             insertUsers(roleService);
-            insertAccounts();
+            // insertAccounts();
         };
     }
 
@@ -73,6 +70,14 @@ public class StartData {
             Role roleUser = roleService.getUserRole();
             Role roleAdmin = roleService.getAdminRole();
 
+            Currency currency = currencyRepository.findBySlug("PLN");
+            Currency currency2 = currencyRepository.findBySlug("USD");
+
+            Account account = Account.create(currency);
+            Account account2 = Account.create(currency2);
+
+
+
             User user = new User();
             user.setPassword(bCryptPasswordEncoder().encode("user"));
             user.setFirstName("Gabriel");
@@ -80,6 +85,10 @@ public class StartData {
             user.setEmail("gabriel@wp.pl");
             user.setUsername("user");
             user.setRole(roleUser);
+
+            user.addAccount(account);
+            user.addAccount(account2);
+
 
             User admin = new User();
             admin.setPassword(bCryptPasswordEncoder().encode("admin"));
@@ -92,26 +101,37 @@ public class StartData {
             userRepository.save(user);
             userRepository.save(admin);
             userRepository.flush();
+
+
+            historyRecordRepository.save(HistoryRecord.create(account, account2, (float) 100.02, "test1"));
+            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.20, "test1"));
+            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "test1"));
+            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 1200.00, "test1"));
+            historyRecordRepository.flush();
         }
 
     }
 
-    private void insertAccounts() {
-        if (accountRepository.findAll().isEmpty()) {
-
-            User user = userRepository.findByUsernameOrEmail("user");
-            Currency currency = currencyRepository.findBySlug("PLN");
-
-            Account account = Account.create(user, currency);
-
-            Currency currency2 = currencyRepository.findBySlug("USD");
-            Account account2 = Account.create(user, currency2);
-
-            accountRepository.save(account2);
-            accountRepository.save(account);
-            accountRepository.flush();
-        }
-    }
+//    private void insertAccounts() {
+//        if (accountRepository.findAll().isEmpty()) {
+//
+//            User user = userRepository.findByUsernameOrEmail("user");
+//            Currency currency = currencyRepository.findBySlug("PLN");
+//
+//            Account account = Account.create(currency);
+//
+//            Currency currency2 = currencyRepository.findBySlug("USD");
+//            Account account2 = Account.create(currency2);
+//
+////            account.addHistoryRecord(HistoryRecord.create(account, account2, (float) 100.00, "test1"));
+////            account.addHistoryRecord(HistoryRecord.create(account2, account, (float) 100.00, "test2"));
+//
+//
+//            accountRepository.save(account2);
+//            accountRepository.save(account);
+//            accountRepository.flush();
+//        }
+//    }
 
 
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

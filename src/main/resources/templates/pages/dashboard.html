@@ -51,7 +51,6 @@
                     <table class="centered">
                         <thead>
                         <tr>
-                            <th>Data</th>
                             <th>Nazwa</th>
                             <th>Wartość</th>
                         </tr>
@@ -61,8 +60,7 @@
                         <div th:each="history:${historyList}" th:object="${history}">
 
                         <tr>
-                            <td>[[*{date}]]</td>
-                            <td>[[*{name}]]</td>
+                            <td>[[*{title}]]</td>
                             <td>[[*{value}]]</td>
                         </tr>
 

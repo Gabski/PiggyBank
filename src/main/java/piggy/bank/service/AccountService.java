@@ -11,13 +11,4 @@ public class AccountService implements AccountServiceInterface {
 
     @Autowired
     private AccountRepository accountRepository;
-
-    @Autowired
-    private UserService userService;
-
-    @Override
-    public Object getAllByUser(User user) {
-        return accountRepository.getAllByUser(user);
-    }
-
 }

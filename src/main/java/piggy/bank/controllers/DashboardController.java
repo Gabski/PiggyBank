@@ -1,15 +1,13 @@
 package piggy.bank.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piggy.bank.entity.User;
 import piggy.bank.repository.AccountHistoryRecordRepository;
 import piggy.bank.repository.AccountRepository;
-import piggy.bank.repository.UserRepository;
+import piggy.bank.repository.HistoryRecordRepository;
 
 
 @Controller
@@ -18,6 +16,8 @@ public class DashboardController extends AppController {
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    HistoryRecordRepository historyRecordRepository;
 
     @GetMapping({"/dashboard"})
     public String show(Model model) {
@@ -28,9 +28,9 @@ public class DashboardController extends AppController {
 
         User user = getLoggedUser();
 
-        model.addAttribute("username", user.getFirstName());
-        model.addAttribute("historyList", accountHistoryRecordRepository.getAll().subList((size - 5), size));
-        model.addAttribute("accountList", accountRepository.getAllByUser(user));
+        model.addAttribute("user", user.getFirstName());
+        model.addAttribute("historyList", historyRecordRepository.findByAccount(user.getAccounts().iterator().next()));
+        model.addAttribute("accountList", user.getAccounts());
         return "pages/dashboard";
     }
 }

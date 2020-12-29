@@ -9,6 +9,4 @@ import piggy.bank.entity.User;
 import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    @Query("SELECT a FROM Account a WHERE a.user=:user")
-    List<Account> getAllByUser(User user);
 }

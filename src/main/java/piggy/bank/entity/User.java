@@ -2,18 +2,13 @@ package piggy.bank.entity;
 
 import piggy.bank.entity.Role;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -60,6 +55,17 @@ public class User implements Serializable {
 
     @JoinColumn(name = "pesel")
     private String pesel;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "accounts",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "account_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private final Set<Account> accounts = new HashSet<>();
+
 
     public Long getId() {
         return id;
@@ -115,6 +121,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void addAccount(Account account) {
+        this.accounts.add(account);
     }
 
 }
