@@ -32,16 +32,16 @@ public class Application extends Entity implements Serializable {
     @NotEmpty
     private String email;
 
-    private Currency currency;
+    private Currency2 currency;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate cratedAt;
 
     public Application() {
-        this.currency = new Currency(1l, "Złoty polski", "PLN");
+        this.currency = new Currency2(1l, "Złoty polski", "PLN");
     }
 
-    public Application(long id, String name, Double value, Currency currency) {
+    public Application(long id, String name, Double value, Currency2 currency) {
         this.id = id;
         this.name = name;
         this.value = value;
@@ -65,11 +65,11 @@ public class Application extends Entity implements Serializable {
         this.value = value;
     }
 
-    public Currency getCurrency() {
+    public Currency2 getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(Currency2 currency) {
         this.currency = currency;
     }
 

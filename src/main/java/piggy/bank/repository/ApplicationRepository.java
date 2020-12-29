@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ApplicationRepository extends AppRepository<Application> {
     public ApplicationRepository() {
 
-        CurrencyRepository currencyRepository = new CurrencyRepository();
+        CurrencyRepository2 currencyRepository = new CurrencyRepository2();
         long id = 1;
         this.collection = new ArrayList<>();
         this.collection.add(new Application(id++, "Wniosek o kredyt", (double) 1222233, currencyRepository.getById((long) 1)));

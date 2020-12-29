@@ -1,14 +1,38 @@
 package piggy.bank.entity;
 
-public class Currency extends Entity {
+import javax.persistence.Entity;
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "currency")
+public class Currency implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "slug")
     private String slug;
 
-    public Currency(Long id, String name, String slug) {
+    public static Currency initCurrency(String name, String slug) {
+        Currency currency = new Currency();
+        currency.setName(name);
+        currency.setSlug(slug);
+
+        return currency;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
-        this.name = name;
-        this.slug = slug;
     }
 
     public String getName() {

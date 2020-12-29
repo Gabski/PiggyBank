@@ -1,30 +1,23 @@
 package piggy.bank.entity;
 
-public class Account extends Entity{
+import javax.persistence.Entity;
+import javax.persistence.*;
+import java.io.Serializable;
 
-    private String name;
+@Entity
+@Table(name = "account")
+public class Account implements Serializable {
 
-    private String number;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
-    public Account(Long id, String name, String number) {
-        this.name = name;
-        this.id = id;
-        this.number = number;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
 }

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -24,24 +26,40 @@ public class User implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "first_name", length = 75)
     private String firstName;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "last_name", length = 80)
     private String lastName;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "username", length = 65)
     private String username;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "password", length = 64)
     private String password;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "email", unique = true, length = 115)
     private String email;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @JoinColumn(name = "phone_number")
+    private String phoneNumber;
+
+    @JoinColumn(name = "pesel")
+    private String pesel;
 
     public Long getId() {
         return id;

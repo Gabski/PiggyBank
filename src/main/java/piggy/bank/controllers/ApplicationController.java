@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import piggy.bank.entity.Application;
-import piggy.bank.entity.Currency;
+import piggy.bank.entity.Currency2;
 import piggy.bank.repository.ApplicationRepository;
-import piggy.bank.repository.CurrencyRepository;
+import piggy.bank.repository.CurrencyRepository2;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +34,8 @@ public class ApplicationController extends AppController {
 
 
     @ModelAttribute("typesOfCurrency")
-    public List<Currency> loadCurrencyType() {
-        CurrencyRepository currencyRepository = new CurrencyRepository();
+    public List<Currency2> loadCurrencyType() {
+        CurrencyRepository2 currencyRepository = new CurrencyRepository2();
         return currencyRepository.getAll();
     }
 

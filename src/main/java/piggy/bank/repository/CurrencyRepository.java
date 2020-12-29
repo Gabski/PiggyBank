@@ -1,22 +1,9 @@
 package piggy.bank.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import piggy.bank.entity.Currency;
+import piggy.bank.entity.Role;
 
-import java.util.ArrayList;
+public interface CurrencyRepository extends JpaRepository<Currency, Long> {
 
-public class CurrencyRepository extends AppRepository<Currency> {
-    public CurrencyRepository() {
-        long id = 1;
-        this.collection = new ArrayList<>();
-        this.collection.add(new Currency(id++, "Złoty polski", "PLN"));
-    }
-
-    @Override
-    public Currency getById(Long id) {
-        for (Currency currency : collection) {
-            if (currency.getId().equals(id))
-                return currency;
-        }
-        return null;
-    }
 }

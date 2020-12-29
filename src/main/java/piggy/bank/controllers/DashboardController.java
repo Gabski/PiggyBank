@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Controller
 public class DashboardController extends AppController {
-    @GetMapping({"/"})
+    @GetMapping({"/dashboard"})
     public String show(Model model) {
 
         AccountRepository accountRepository = new AccountRepository();

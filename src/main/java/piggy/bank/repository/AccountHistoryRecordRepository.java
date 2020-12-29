@@ -1,6 +1,5 @@
 package piggy.bank.repository;
 
-import piggy.bank.entity.Account;
 import piggy.bank.entity.AccountHistoryRecord;
 
 import java.util.ArrayList;
