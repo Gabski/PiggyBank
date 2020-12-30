@@ -15,9 +15,12 @@
     <div th:replace="~{layout/nav :: menu}"></div>
 </div>
 
+
 <div layout:fragment="breadcrumb">
     <div th:replace="~{layout/breadcrumb :: breadcrumb('/dashboard', 'Statystyki')}"></div>
 </div>
+
+<div class="helper-text wrong" th:if="${alert}" th:text="${alert.title}"></div>
 
 <div layout:fragment="content"></div>
 

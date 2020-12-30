@@ -27,12 +27,8 @@ public class DashboardController extends AppController {
     @GetMapping({"/dashboard"})
     public String show(Model model) {
 
-        AccountHistoryRecordRepository accountHistoryRecordRepository = new AccountHistoryRecordRepository();
-
-        int size = accountHistoryRecordRepository.size();
-
         User user = getLoggedUser();
-       AccountAdapterCollection accountAdapterList = accountService.getAdaptersList(user.getAccounts());
+        AccountAdapterCollection accountAdapterList = accountService.getAdaptersList(user.getAccounts());
 
         model.addAttribute("user", user.getFirstName());
         model.addAttribute("historyList", accountAdapterList.getAllHistory());

@@ -32,6 +32,7 @@ public class Account implements Serializable {
     public static Account create(Currency currency) {
         Account account = new Account();
         account.setCurrency(currency);
+        account.setCreateAt(LocalDate.now());
         account.setBankNumber(Account.randomBankNumber());
         return account;
     }

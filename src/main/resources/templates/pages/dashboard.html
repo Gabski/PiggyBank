@@ -20,12 +20,10 @@
                         <div class="card">
                                 <span class="card-title">[[*{account.bankNumber}]]</span>
                                 <div class="card-content">
-                                    <h6>Stan konta: [[*{balance}]] [[*{account.currency.slug}]]</h6>
-                                    <!--                            <a class="waves-effect waves-light btn right" th:href="@{/application/document(id=*{id})}"><i-->
-                                    <!--                                    class="material-icons left">note</i>Nowy przelew</a>-->
-
-                                    <a class="btn bg-color-light btn-submit" th:href="@{/przelew}">Nowy przelew</a>
-                                    <a class="btn bg-color-light btn-submit" th:href="@{/przelew}">Szczegóły konta</a>
+                                    <h6>Stan konta: [[*{#numbers.formatDecimal(balance,1,2,'COMMA')}]] [[*{account.currency.slug}]]</h6>
+<!--                                    <a class="btn bg-color-light btn-submit" th:href="@{/account/show(id=*{id})}">Nowy przelew</a>-->
+                                    <a class="btn bg-color-light btn-submit" th:href="@{/transfer/{account}(account=*{account.id})}">Nowy przelew</a>
+                                    <a class="btn bg-color-light btn-submit" th:href="@{account/{account}(account=*{account.id})}">Szczegóły konta</a>
                                 </div>
                         </div>
                     </div>
@@ -54,7 +52,7 @@
                                 <td>[[*{from.bankNumber}]]</td>
                                 <td>[[*{to.bankNumber}]]</td>
                                 <td>[[*{title}]]</td>
-                                <td>[[*{value}]]</td>
+                                <td>[[*{#numbers.formatDecimal(value,1,2,'COMMA')}]]</td>
                             </tr>
 
                         </div>

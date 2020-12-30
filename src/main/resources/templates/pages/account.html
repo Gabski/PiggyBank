@@ -6,7 +6,7 @@
 </head>
 <body>
 <div layout:fragment="breadcrumb">
-    <div th:replace="~{layout/breadcrumb :: breadcrumb('/history', 'Historia')}"></div>
+    <div th:replace="~{layout/breadcrumb :: breadcrumb(@{/account/{account}(account=${account.account.id})}, ${account.account.bankNumber})}"></div>
 </div>
 <div class="hero-unit" layout:fragment="content">
 
@@ -14,7 +14,22 @@
     <section class="section bg-color-light pt-3 pb-3">
         <div class="container">
             <div class="row">
+                <div class="col l6">
+                    <h6 class="mb-3">Konto: [[${account.account.bankNumber}]]</h6>
+                    <p>Balance: [[*{#numbers.formatDecimal(account.balance,1,2,'COMMA')}]] [[${account.account.currency.slug}]]</p>
+                    <a class="btn btn-primary btn-submit"
+                       th:href="@{/transfer/{account}(account=*{account.account.id})}">Nowy przelew z tego konta</a>
+
+                </div>
+
+                <div class="col l6">
+                    <h6 class="mb-3">Dane konta</h6>
+                    <p>Utworzono: [[*{account.account.createAt}]]</p>
+                </div>
+
                 <div class="col l12">
+                    <br><br>
+
                     <h6 class="mb-3">Historia</h6>
                     <div class="card">
                         <table class="table table-bordered">
@@ -29,7 +44,7 @@
                             </thead>
 
                             <tbody>
-                            <div th:each="history:${historyList}" th:object="${history}">
+                            <div th:each="history:${account.history}" th:object="${history}">
 
                                 <tr>
                                     <td>[[*{createAt}]]</td>
@@ -43,11 +58,12 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    </div>
+</div>
 </body>
 </html>

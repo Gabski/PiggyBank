@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class SendCashType implements Serializable {
+public class TransferType implements Serializable {
 
     private String to;
 

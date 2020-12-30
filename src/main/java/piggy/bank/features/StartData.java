@@ -77,12 +77,18 @@ public class StartData {
             Account account3 = Account.create(currency);
 
 
-
             User user = new User();
             user.setPassword(bCryptPasswordEncoder().encode("user"));
             user.setFirstName("Gabriel");
             user.setLastName("Koziestański");
             user.setEmail("gabriel@wp.pl");
+            user.setPhoneNumber("123412344");
+            user.setCity("Siedlce");
+            user.setPostal("Siedlce");
+            user.setPesel("94022708335");
+            user.setStreet("Polna");
+            user.setAddressNumber("12");
+            user.setPostalCode("01-122");
             user.setUsername("user");
             user.setRole(roleUser);
 

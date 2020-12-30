@@ -24,8 +24,8 @@
                 <div class="col l6 v-center">
                     <img src="/images/coins-948603_640.jpg" class="img-flex">
                 </div>
-                <div class="col l6 v-center">
-                    <h4>Zaloguj się na swoje konto</h4>
+                <div class="col l4">
+                    <h5>Zaloguj się na swoje konto</h5>
                     <form th:action="@{/login}" method="POST" class="form-signin">
                         <div th:if="${param.error}">
                             <p>Niepoprawne dane logowania</p>
@@ -45,7 +45,27 @@
                         <button class="btn btn-primary btn-submit" name="Submit" value="Login" type="Submit">Login
                         </button>
                     </form>
+                </div>
+                <div class="col l2">
+                    <h5>Projekt demo</h5>
 
+                    <div>
+                        <form th:action="@{/login}" method="POST" class="form-signin">
+                            <input type="hidden" name="password" value="user"/>
+                            <input type="hidden" name="username" value="user"/>
+                            <button class="btn btn-primary btn-submit" name="Submit" value="Login" type="Submit">
+                                user:user
+                            </button>
+                        </form>
+
+                        <form th:action="@{/login}" method="POST" class="form-signin">
+                            <input type="hidden" name="password" value="admin"/>
+                            <input type="hidden" name="username" value="admin"/>
+                            <button class="btn btn-primary btn-submit" name="Submit" value="Login" type="Submit">
+                                admin:admin
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
