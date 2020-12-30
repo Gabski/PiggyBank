@@ -1,23 +1,30 @@
 <div th:fragment="menu" xmlns:th="http://www.w3.org/1999/xhtml">
-<nav>
-    <div class="container">
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">PiggyBank</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="/dashboard">Pulpit</a></li>
-                <li><a href="/przelew">Nowy przelew</a></li>
-                <li><a href="/history">Historia</a></li>
-<!--                <li><a href="/application">Wnioski kredytowe</a></li>-->
-                <li><a href="/logout">Wyloguj</a></li>
-            </ul>
-        </div>
-    </div>
+<nav class="nav js-sticky-nav">
+    <a href="/dashboard" class="brand">
+        <i class="fas fa-piggy-bank"></i>PIGGYbank
+    </a>
+    <ul class="nav-items">
+        <li class="nav-item"><a class="nav-link" href="/dashboard">Pulpit</a></li>
+        <li class="nav-item"><a class="nav-link" href="/przelew">Nowy przelew</a></li>
+        <li class="nav-item"><a class="nav-link" href="/history">Historia</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Wyloguj</a></li>
+    </ul>
 </nav>
 
-<ul class="sidenav" id="mobile-demo">
-    <li><a href="/">Pulpit</a></li>
-    <li><a href="/history">Historia</a></li>
-<!--    <li><a href="/application">Wnioski kredytowe</a></li>-->
-</ul>
+
+<button id="menu_btn" class="mobile-burger open"><img src="images/logo-white.png"
+                                                      alt="Przycisk Menu"></button>
+
+<nav class="mobile-nav inactive">
+    <a href="/dashboard" class="brand">
+        <i class="fas fa-piggy-bank"></i>PIGGYbank
+    </a>
+
+    <ul class="nav-items">
+        <li class="nav-item"><a class="nav-link" href="/dashboard">Pulpit</a></li>
+        <li class="nav-item"><a class="nav-link" href="/przelew">Nowy przelew</a></li>
+        <li class="nav-item"><a class="nav-link" href="/history">Historia</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Wyloguj</a></li>
+    </ul>
+</nav>
 </div>

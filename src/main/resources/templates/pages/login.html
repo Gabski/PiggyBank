@@ -7,22 +7,49 @@
 <body>
 <div class="hero-unit" layout:fragment="content">
 
-    <form action="/login" method="POST" class="form-signin">
-        <h3 class="form-signin-heading">LOGIN PAGE</h3>
 
-                <br/>
-                <div th:if="${param.error}">
-                    <p>Username or password is invalid</p>
+    <section class="section bg-color-light pt-4 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col m6">
+                    <h1>Logowanie</h1>
                 </div>
+            </div>
+        </div>
+    </section>
 
-        <input type="text" id="username" name="username" placeholder="Username or email"
-               class="form-control"/> <br/>
-        <input type="password" placeholder="Password"
-               id="password" name="password" class="form-control"/> <br/>
+    <section class="section pt-6 pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 v-center">
+                    <img src="/images/coins-948603_640.jpg" class="img-flex">
+                </div>
+                <div class="col l6 v-center">
+                    <h4>Zaloguj się na swoje konto</h4>
+                    <form th:action="@{/login}" method="POST" class="form-signin">
+                        <div th:if="${param.error}">
+                            <p>Niepoprawne dane logowania</p>
+                        </div>
 
+                        <div class="form-control">
+                            <label>Użytkownik lub email</label>
+                            <input type="text" id="username" name="username" placeholder="Użytkownik lub email"
+                                   class="form-control"/> <br/>
+                        </div>
+                        <div class="form-control">
+                            <label>Hasło</label>
+                            <input type="password" placeholder="Hasło"
+                                   id="password" name="password" class="form-control"/> <br/>
+                        </div>
 
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
-    </form>
+                        <button class="btn btn-primary btn-submit" name="Submit" value="Login" type="Submit">Login
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 </div>

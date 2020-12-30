@@ -26,13 +26,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         if (username.trim().isEmpty()) {
-            throw new UsernameNotFoundException("username is empty");
+            throw new UsernameNotFoundException("Musisz wpisać nazwę użytkownika");
         }
 
         User user = userService.findByUsernameOrEmail(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("User " + username + " not found");
+            throw new UsernameNotFoundException("Użytkownik " + username + " nie istnieje");
         }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user));

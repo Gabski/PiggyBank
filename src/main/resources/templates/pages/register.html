@@ -6,39 +6,100 @@
 </head>
 <body>
 <div class="hero-unit" layout:fragment="content">
-<h2>Rejestracja</h2>
+
+    <section class="section bg-color-light pt-4 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col m6">
+                    <h1>Załóż konto</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <form autocmoplete="on" class="section pt-6 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col l6">
+                    <h2 class="h5">Dane podstawowe</h2>
+
+                    <div class="form-control">
+                        <label>Imie</label>
+                        <input type="text" placeholder="np. Andrzej" name="" required="true"
+                               pattern="[A-Za-ząęźżśóćńł\s\p{L}]{5,42}" autocomplete="name">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Nazwisko</label>
+                        <input type="text" placeholder="Nazwisko" name="">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Telefon</label>
+                        <input type="text" placeholder="telefon" name="" required="true" pattern="[0-9+\s]{5,14}"
+                               autocomplete="tel">
+                    </div>
+
+                    <div class="form-control">
+                        <label>PESEL</label>
+                        <input type="text" placeholder="PESEL" name="">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Email</label>
+                        <input type="email" placeholder="email" name="" required="true"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplete="email">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Waluta</label>
+                        <select name="">
+                            <option>Test</option>
+                        </select>
+                    </div>
 
 
-    <form th:action="@{register/send}" th:method="post" th:object="${user}">
-        <div>
-            <label th:text="#{label.user.firstName}">first</label>
-            <input th:field="*{firstName}"/>
-            <p th:each="error: ${#fields.errors('firstName')}"
-               th:text="${error}">Validation error</p>
+                </div>
+                <div class="col l6">
+                    <h2 class="h5">Dane adresowe</h2>
+
+                    <div class="form-control">
+                        <label>Ulica</label>
+                        <input type="text" placeholder="Ulica" name="" required="true"
+                               pattern="[1-9A-Za-ząęźżśóćńł\s.\s,\s-\p{L}]{3,42}" autocomplete="street-address">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Miejscowość</label>
+                        <input type="text" placeholder="Miejscowość" name="" required="true"
+                               pattern="[1-9A-Za-ząęźżśóćńł\s\p{L}]{3,42}" autocomplete="address-level2">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Numer budynku / mieszkania</label>
+                        <input type="text" placeholder="Numer budynku / mieszkania" name="" required="true"
+                               pattern="[A-Ząęźżśóćńła-z0-9+\s/]{0,14}">
+                    </div>
+
+
+                    <div class="form-control">
+                        <label>Kod pocztowy</label>
+                        <input type="text" placeholder="00-000" name="" required="true" pattern="[0-9]{2}-[0-9]{3}"
+                               autocomplete="postal-code">
+                    </div>
+
+                    <div class="form-control">
+                        <label>Poczta</label>
+                        <input type="text" placeholder="Poczta" name="" required="true"
+                               pattern="[A-Ząęźżśóćńła-z\s\p{L}]{3,42}" autocomplete="address-level2">
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary btn-submit">Wyślij zgłoszenie</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <label th:text="#{label.user.lastName}">last</label>
-            <input th:field="*{lastName}"/>
-            <p th:each="error : ${#fields.errors('lastName')}"
-               th:text="${error}">Validation error</p>
-        </div>
-        <div>
-            <label th:text="#{label.user.email}">email</label>
-            <input type="email" th:field="*{email}"/>
-            <p th:each="error : ${#fields.errors('email')}"
-               th:text="${error}">Validation error</p>
-        </div>
-        <div>
-            <label th:text="#{label.user.password}">password</label>
-            <input type="password" th:field="*{password}"/>
-            <p th:each="error : ${#fields.errors('password')}"
-               th:text="${error}">Validation error</p>
-        </div>
-        <div>
-            <label th:text="#{label.user.confirmPass}">confirm</label>
-            <input type="password" th:field="*{matchingPassword}"/>
-        </div>
-        <button type="submit" th:text="#{label.form.submit}">submit</button>
     </form>
 
 </div>

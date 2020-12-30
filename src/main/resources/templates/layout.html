@@ -4,17 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Project</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/platformy.css}"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
+
 <div layout:fragment="menu">
   <div th:replace="~{layout/nav :: menu}"></div>
 </div>
+
 <div layout:fragment="breadcrumb">
   <div th:replace="~{layout/breadcrumb :: breadcrumb('/', 'Pulpit')}"></div>
 </div>
+
 <div class="container">
   <div layout:fragment="content"></div>
   <div layout:fragment="footer"></div>
@@ -28,8 +32,7 @@
   </div>
 </footer>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script  th:src="@{/js/custom.js}"></script>
+
+<script  th:src="@{/js/script.js}"></script>
 </body>
 </html>
