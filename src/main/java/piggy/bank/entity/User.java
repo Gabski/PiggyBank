@@ -64,6 +64,7 @@ public class User implements Serializable {
             inverseJoinColumns = {
                     @JoinColumn(name = "account_id", referencedColumnName = "id",
                             nullable = false, updatable = false)})
+    @OrderBy("createAt")
     private final Set<Account> accounts = new HashSet<>();
 
 

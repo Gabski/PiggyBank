@@ -3,6 +3,7 @@ package piggy.bank.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import piggy.bank.adapter.AccountAdapter;
+import piggy.bank.adapter.AccountAdapterCollection;
 import piggy.bank.entity.Account;
 import piggy.bank.entity.User;
 import piggy.bank.repository.AccountRepository;
@@ -26,17 +27,17 @@ public class AccountService implements AccountServiceInterface {
         return new AccountAdapter(account, historyRecordRepository.findByAccount(account));
     }
 
-    public List<AccountAdapter> getAdaptersList(Set<Account> accounts) {
+    public AccountAdapterCollection getAdaptersList(Set<Account> accounts) {
 
-        List<AccountAdapter> list = new ArrayList<>();
+        AccountAdapterCollection collection = new AccountAdapterCollection();
 
         var iterator = accounts.iterator();
 
         while (iterator.hasNext()) {
             Account account = iterator.next();
-            list.add(new AccountAdapter(account, historyRecordRepository.findByAccount(account)));
+            collection.add(new AccountAdapter(account, historyRecordRepository.findByAccount(account)));
         }
 
-        return list;
+        return collection;
     }
 }

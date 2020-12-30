@@ -22,7 +22,6 @@ public class LoginController extends AppController {
         return "pages/login";
     }
 
-
     @GetMapping({"/logout"})
     public String logout(Model model) {
         return "pages/login";

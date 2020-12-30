@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import piggy.bank.adapter.AccountAdapter;
+import piggy.bank.adapter.AccountAdapterCollection;
 import piggy.bank.entity.User;
 import piggy.bank.repository.AccountHistoryRecordRepository;
 import piggy.bank.repository.AccountRepository;
 import piggy.bank.repository.HistoryRecordRepository;
 import piggy.bank.service.AccountService;
-
-import java.util.List;
 
 
 @Controller
@@ -34,12 +32,11 @@ public class DashboardController extends AppController {
         int size = accountHistoryRecordRepository.size();
 
         User user = getLoggedUser();
-
-        List<AccountAdapter> accountAdapterList = accountService.getAdaptersList(user.getAccounts());
+       AccountAdapterCollection accountAdapterList = accountService.getAdaptersList(user.getAccounts());
 
         model.addAttribute("user", user.getFirstName());
-        model.addAttribute("historyList", accountAdapterList.get(0).getHistory());
-        model.addAttribute("accountList", accountAdapterList);
+        model.addAttribute("historyList", accountAdapterList.getAllHistory());
+        model.addAttribute("accountList", accountAdapterList.getAccounts());
         return "pages/dashboard";
     }
 }

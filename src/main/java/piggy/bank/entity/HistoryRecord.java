@@ -73,6 +73,11 @@ public class HistoryRecord implements Serializable {
     }
 
     public Account getTo() {
+
+        if(to == null){
+            return new Account();
+        }
+
         return to;
     }
 
@@ -81,6 +86,11 @@ public class HistoryRecord implements Serializable {
     }
 
     public Account getFrom() {
+
+        if(from == null){
+            return new Account();
+        }
+
         return from;
     }
 

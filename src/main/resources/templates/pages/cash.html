@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Historia transakcji</title>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <div th:replace="~{layout/breadcrumb :: breadcrumb('/przelew', 'Nowy Przelew')}"></div>
+</div>
+
+
+<div class="hero-unit" layout:fragment="content">
+    <h4>Pulpit</h4>
+
+    <div>
+    <form th:action="@{send}" th:method="post" th:object="${form}">
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="name" th:field="*{title}" type="text">
+                <label for="name">Nazwa wniosku</label>
+                <span class="helper-text wrong" th:if="${#fields.hasErrors('title')}" th:each="err : ${#fields.errors('title')}"
+                      th:text="${err}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input th:field="*{to}" type="text">
+                <label for="name">Do</label>
+                <span class="helper-text wrong" th:if="${#fields.hasErrors('to')}" th:each="err : ${#fields.errors('to')}"
+                      th:text="${err}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input th:field="*{value}" type="number">
+                <label for="name">Ile</label>
+                <span class="helper-text wrong" th:if="${#fields.hasErrors('value')}" th:each="err : ${#fields.errors('value')}"
+                      th:text="${err}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input th:field="*{from}" type="text">
+                <label for="name">Od</label>
+                <span class="helper-text wrong" th:if="${#fields.hasErrors('from')}" th:each="err : ${#fields.errors('from')}"
+                      th:text="${err}"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="waves-effect waves-light btn" value="1">Wyślij</button>
+
+
+    </form>
+    </div>
+
+</div>
+
+</body>
+</html>

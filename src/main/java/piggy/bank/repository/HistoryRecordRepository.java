@@ -10,6 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface HistoryRecordRepository extends JpaRepository<HistoryRecord, Long> {
-    @Query("SELECT r FROM HistoryRecord r WHERE r.to=:account OR r.from=:account")
+    @Query("SELECT r FROM HistoryRecord r WHERE r.to=:account OR r.from=:account ORDER BY r.id asc")
     List<HistoryRecord> findByAccount(Account account);
 }
