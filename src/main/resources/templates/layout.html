@@ -1,38 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Project</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Project</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
 <div layout:fragment="menu">
-  <div th:replace="~{layout/nav :: menu}"></div>
+    <div th:replace="~{layout/nav :: menu}"></div>
 </div>
 
 <div layout:fragment="breadcrumb">
-  <div th:replace="~{layout/breadcrumb :: breadcrumb('/', 'Pulpit')}"></div>
+    <div th:replace="~{layout/breadcrumb :: breadcrumb('/dashboard', 'Statystyki')}"></div>
 </div>
 
-<div class="container">
-  <div layout:fragment="content"></div>
-  <div layout:fragment="footer"></div>
-</div>
-
-<footer class="page-footer">
-  <div class="footer-copyright">
-    <div class="container">
-      © 2020 PiggyBank przy współpracy z BiedaBank by Gabski
-    </div>
-  </div>
-</footer>
+<div layout:fragment="content"></div>
 
 
-<script  th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>
