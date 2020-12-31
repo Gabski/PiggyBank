@@ -1,11 +1,11 @@
 package piggy.bank.entity;
 
-public class Alert{
+public class Snack {
     private String title;
     private String content;
 
-    public static Alert create(String title, String content) {
-        Alert alert = new Alert();
+    public static Snack create(String title, String content) {
+        Snack alert = new Snack();
 
         alert.setTitle(title);
         alert.setContent(content);

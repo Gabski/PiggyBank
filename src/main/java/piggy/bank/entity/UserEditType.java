@@ -1,5 +1,8 @@
 package piggy.bank.entity;
 
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -18,18 +21,31 @@ public class UserEditType implements Serializable {
     @NotEmpty
     private String email;
 
+    @NotNull
+    @NotEmpty
     private String phoneNumber;
 
+    @NotNull
+    @NumberFormat(style = NumberFormat.Style.NUMBER) @Min(1)
     private String pesel;
-
+    @NotNull
+    @NotEmpty
     private String street;
 
+    @NotNull
+    @NotEmpty
     private String city;
 
+    @NotNull
+    @NotEmpty
     private String postal;
 
+    @NotNull
+    @NotEmpty
     private String postalCode;
 
+    @NotNull
+    @NotEmpty
     private String addressNumber;
 
     public static UserEditType create(User user) {

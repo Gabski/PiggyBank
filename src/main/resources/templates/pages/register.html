@@ -17,7 +17,7 @@
         </div>
     </section>
 
-    <form autocmoplete="on" class="section pt-6 pb-5">
+    <form autocmoplete="on" class="section pt-6 pb-5" th:action="@{send}" th:method="post" th:object="${registerType}">
         <div class="container">
             <div class="row">
                 <div class="col l6">
@@ -53,9 +53,13 @@
 
                     <div class="form-control">
                         <label>Waluta</label>
-                        <select name="">
-                            <option>Test</option>
-                        </select>
+                        <label>
+                            <select th:field="*{currency.id}">
+                                <option th:each="currency:${typesOfCurrency}" th:value="${currency.id}">
+                                    [[${currency.name}]] ([[${currency.slug}]])
+                                </option>
+                            </select>
+                        </label>
                     </div>
 
 

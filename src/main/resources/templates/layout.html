@@ -20,7 +20,7 @@
     <div th:replace="~{layout/breadcrumb :: breadcrumb('/dashboard', 'Statystyki')}"></div>
 </div>
 
-<div class="helper-text wrong" th:if="${alert}" th:text="${alert.title}"></div>
+<div class="snackbar snack" th:if="${alert}" th:text="${alert.content}"></div>
 
 <div layout:fragment="content"></div>
 

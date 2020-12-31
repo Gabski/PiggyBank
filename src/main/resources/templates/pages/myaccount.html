@@ -45,7 +45,7 @@
 
                     <div class="form-control">
                         <label>PESEL</label>
-                        <input type="text" placeholder="PESEL" th:field="*{pesel}">
+                        <input type="text" placeholder="PESEL" th:field="*{pesel}" th:class="${#fields.hasErrors('pesel')} ? 'invalid' : ''">
                         <span class="helper-text wrong" th:if="${#fields.hasErrors('pesel')}"
                               th:each="err : ${#fields.errors('pesel')}"
                               th:text="${err}"></span>

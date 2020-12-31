@@ -13,7 +13,6 @@ import piggy.bank.repository.UserRepository;
 import piggy.bank.service.AccountService;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class AccountController extends AppController {
@@ -34,10 +33,11 @@ public class AccountController extends AppController {
 
 
     @PostMapping({"/myaccount"})
-    public String myAccountPost(Model model, @ModelAttribute("form") @Valid UserEditType userEditType, BindingResult result) {
+    public String myAccountPost(Model model, @ModelAttribute("userType") @Valid UserEditType userEditType, BindingResult result) {
 
-        model.addAttribute("alert", Alert.create("Błąd", "Nie zapisano"));
         if (result.hasErrors()) {
+            model.addAttribute("alert", Snack.create("Błąd", "Nie zapisano, sprawdź błędy"));
+            model.addAttribute("userType", userEditType);
             return "pages/myaccount";
         }
 
@@ -57,7 +57,7 @@ public class AccountController extends AppController {
         userRepository.save(user);
         userRepository.flush();
 
-        model.addAttribute("alert", Alert.create("Sukces", "Zapisano"));
+        model.addAttribute("alert", Snack.create("Sukces", "Zapisano"));
         model.addAttribute("userType", userEditType);
         return "pages/myaccount";
     }
