@@ -1,8 +1,5 @@
 package piggy.bank.entity;
 
-import org.springframework.format.annotation.NumberFormat;
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -27,7 +24,7 @@ public class UserEditType implements Serializable {
     private String phoneNumber;
 
     @NotNull
-    @Pattern(regexp = "^[0-9]{11}$")
+    @Pattern(regexp = "^[0-9]{11}$", message = "Nie poprawny format")
     private String pesel;
     @NotNull
     @NotEmpty
@@ -43,7 +40,7 @@ public class UserEditType implements Serializable {
 
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[0-9]{2}[-][0-9]{3}$")
+    @Pattern(regexp = "^[0-9]{2}[-][0-9]{3}$", message = "Nie poprawny format")
     private String postalCode;
 
     @NotNull

@@ -12,17 +12,17 @@ public class RegisterType extends UserEditType {
 
     @NotNull
     @NotEmpty
-    @Size(min=3, max=12)
+    @Size(min=3, max=12, message = "Nie prawidłowa ilość znaków")
     private String password;
 
     @NotNull
     @NotEmpty
-    @Size(min=5, max=50)
+    @Size(min=3, max=50, message = "Nie prawidłowa ilość znaków")
     private String username;
 
     @NotNull
     @NotEmpty
-    @Size(min=3, max=12)
+    @Size(min=3, max=12, message = "Nie prawidłowa ilość znaków")
     private String repeatPassword;
 
     public Currency getCurrency() {

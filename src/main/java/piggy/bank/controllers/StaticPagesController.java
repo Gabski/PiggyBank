@@ -71,12 +71,30 @@ public class StaticPagesController extends AppController {
     @PostMapping({"/register/save"})
     public String myAccountPost(Model model, @ModelAttribute("registerType") @Valid RegisterType registerType, BindingResult result) {
 
+        model.addAttribute("registerType", registerType);
 
         if (result.hasErrors()) {
             model.addAttribute("alert", Snack.create("Błąd", "Nie zapisano, sprawdź błędy"));
-            model.addAttribute("registerType", registerType);
             return "pages/register";
         }
+
+        if (!registerType.getPassword().equals(registerType.getRepeatPassword())) {
+            model.addAttribute("alert", Snack.create("Błąd", "Hasła nie są identyczne"));
+            return "pages/register";
+        }
+
+        var testUser = userRepository.findByUsernameOrEmail(registerType.getUsername());
+        if (testUser != null) {
+            model.addAttribute("alert", Snack.create("Błąd", "Użytkownik taki już istnieje zmień nazwę użytkownika"));
+            return "pages/register";
+        }
+
+        testUser = userRepository.findByUsernameOrEmail(registerType.getEmail());
+        if (testUser != null) {
+            model.addAttribute("alert", Snack.create("Błąd", "Użytkownik taki już istnieje zmień email"));
+            return "pages/register";
+        }
+
 
         User user = new User();
 
