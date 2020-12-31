@@ -2,7 +2,7 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/official-layout"
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Wnioski</title>
+    <title>Rejestracja</title>
 </head>
 <body>
 <div class="hero-unit" layout:fragment="content">
@@ -11,13 +11,15 @@
         <div class="container">
             <div class="row">
                 <div class="col m6">
-                    <h1>Załóż konto</h1>
+                    <h3>Załóż konto</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <form autocmoplete="on" class="section pt-6 pb-5" th:action="@{send}" th:method="post" th:object="${registerType}">
+
+
+    <form method="post" action="/register/save" autocmoplete="on" class="section  pt-6 pb-5" th:object="${registerType}">
         <div class="container">
             <div class="row">
                 <div class="col l6">
@@ -25,30 +27,99 @@
 
                     <div class="form-control">
                         <label>Imie</label>
-                        <input type="text" placeholder="np. Andrzej" name="" required="true"
-                               pattern="[A-Za-ząęźżśóćńł\s\p{L}]{5,42}" autocomplete="name">
+                        <input type="text" placeholder="np. Andrzej" th:field="*{firstName}" required="true"
+                               pattern="[A-Za-ząęźżśóćńł\s\p{L}]{2,42}" autocomplete="name">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('firstName')}"
+                              th:each="err : ${#fields.errors('firstName')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div class="form-control">
                         <label>Nazwisko</label>
-                        <input type="text" placeholder="Nazwisko" name="">
+                        <input type="text" placeholder="Nazwisko" th:field="*{lastName}">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('lastName')}"
+                              th:each="err : ${#fields.errors('lastName')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div class="form-control">
                         <label>Telefon</label>
-                        <input type="text" placeholder="telefon" name="" required="true" pattern="[0-9+\s]{5,14}"
+                        <input type="text" placeholder="telefon" th:field="*{phoneNumber}" required="true"
+                               pattern="[0-9+\s]{5,14}"
                                autocomplete="tel">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('phoneNumber')}"
+                              th:each="err : ${#fields.errors('phoneNumber')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div class="form-control">
                         <label>PESEL</label>
-                        <input type="text" placeholder="PESEL" name="">
+                        <input type="text" placeholder="PESEL" th:field="*{pesel}" th:class="${#fields.hasErrors('pesel')} ? 'invalid' : ''">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('pesel')}"
+                              th:each="err : ${#fields.errors('pesel')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div class="form-control">
                         <label>Email</label>
-                        <input type="email" placeholder="email" name="" required="true"
+                        <input type="email" placeholder="email" th:field="*{email}" required="true"
                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplete="email">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('email')}"
+                              th:each="err : ${#fields.errors('email')}"
+                              th:text="${err}"></span>
+                    </div>
+
+
+                </div>
+                <div class="col l6">
+                    <h2 class="h5">Dane adresowe</h2>
+
+                    <div class="form-control">
+                        <label>Ulica</label>
+                        <input type="text" placeholder="Ulica" th:field="*{street}" required="true"
+                               pattern="[1-9A-Za-ząęźżśóćńł\s.\s,\s-\p{L}]{3,42}" autocomplete="street-address">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('street')}"
+                              th:each="err : ${#fields.errors('street')}"
+                              th:text="${err}"></span>
+                    </div>
+
+                    <div class="form-control">
+                        <label>Miejscowość</label>
+                        <input type="text" placeholder="Miejscowość" th:field="*{city}" required="true"
+                               pattern="[1-9A-Za-ząęźżśóćńł\s\p{L}]{3,42}" autocomplete="address-level2">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('city')}"
+                              th:each="err : ${#fields.errors('city')}"
+                              th:text="${err}"></span>
+                    </div>
+
+                    <div class="form-control">
+                        <label>Numer budynku / mieszkania</label>
+                        <input type="text" placeholder="Numer budynku / mieszkania" th:field="*{addressNumber}"
+                               required="true"
+                               pattern="[A-Ząęźżśóćńła-z0-9+\s/]{0,14}">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('addressNumber')}"
+                              th:each="err : ${#fields.errors('addressNumber')}"
+                              th:text="${err}"></span>
+                    </div>
+
+
+                    <div class="form-control">
+                        <label>Kod pocztowy</label>
+                        <input type="text" placeholder="00-000" th:field="*{postalCode}" required="true"
+                               pattern="[0-9]{2}-[0-9]{3}"
+                               autocomplete="postal-code">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('postalCode')}"
+                              th:each="err : ${#fields.errors('postalCode')}"
+                              th:text="${err}"></span>
+                    </div>
+
+                    <div class="form-control">
+                        <label>Poczta</label>
+                        <input type="text" placeholder="Poczta" th:field="*{postal}" required="true"
+                               pattern="[A-Ząęźżśóćńła-z\s\p{L}]{3,42}" autocomplete="address-level2">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('postal')}"
+                              th:each="err : ${#fields.errors('postal')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div class="form-control">
@@ -62,44 +133,31 @@
                         </label>
                     </div>
 
-
-                </div>
-                <div class="col l6">
-                    <h2 class="h5">Dane adresowe</h2>
-
                     <div class="form-control">
-                        <label>Ulica</label>
-                        <input type="text" placeholder="Ulica" name="" required="true"
-                               pattern="[1-9A-Za-ząęźżśóćńł\s.\s,\s-\p{L}]{3,42}" autocomplete="street-address">
+                        <label>Username</label>
+                        <input type="text" placeholder="Username" th:field="*{username}" required="true">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('username')}"
+                              th:each="err : ${#fields.errors('username')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div class="form-control">
-                        <label>Miejscowość</label>
-                        <input type="text" placeholder="Miejscowość" name="" required="true"
-                               pattern="[1-9A-Za-ząęźżśóćńł\s\p{L}]{3,42}" autocomplete="address-level2">
+                        <label>Hasło</label>
+                        <input type="password" placeholder="Hasło" th:field="*{password}" required="true">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('password')}"
+                              th:each="err : ${#fields.errors('password')}"
+                              th:text="${err}"></span>
                     </div>
-
                     <div class="form-control">
-                        <label>Numer budynku / mieszkania</label>
-                        <input type="text" placeholder="Numer budynku / mieszkania" name="" required="true"
-                               pattern="[A-Ząęźżśóćńła-z0-9+\s/]{0,14}">
-                    </div>
-
-
-                    <div class="form-control">
-                        <label>Kod pocztowy</label>
-                        <input type="text" placeholder="00-000" name="" required="true" pattern="[0-9]{2}-[0-9]{3}"
-                               autocomplete="postal-code">
-                    </div>
-
-                    <div class="form-control">
-                        <label>Poczta</label>
-                        <input type="text" placeholder="Poczta" name="" required="true"
-                               pattern="[A-Ząęźżśóćńła-z\s\p{L}]{3,42}" autocomplete="address-level2">
+                        <label>Powtórz Hasło</label>
+                        <input type="password" placeholder="Hasło" th:field="*{repeatPassword}" required="true">
+                        <span class="helper-text wrong" th:if="${#fields.hasErrors('repeatPassword')}"
+                              th:each="err : ${#fields.errors('repeatPassword')}"
+                              th:text="${err}"></span>
                     </div>
 
                     <div>
-                        <button class="btn btn-primary btn-submit">Wyślij zgłoszenie</button>
+                        <button class="btn btn-primary btn-submit">Zarejestruj konto</button> <a class="btn btn-primary btn-submit" href="/register/demo">Wypełniony formularz demo</a>
                     </div>
                 </div>
             </div>

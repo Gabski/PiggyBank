@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piggy.bank.adapter.AccountAdapterCollection;
 import piggy.bank.entity.User;
-import piggy.bank.repository.AccountHistoryRecordRepository;
 import piggy.bank.repository.AccountRepository;
 import piggy.bank.repository.HistoryRecordRepository;
 import piggy.bank.service.AccountService;

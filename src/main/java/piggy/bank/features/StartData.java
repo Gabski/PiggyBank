@@ -71,10 +71,12 @@ public class StartData {
             Role roleAdmin = roleService.getAdminRole();
 
             Currency currency = currencyRepository.findBySlug("PLN");
+            Currency currency2 = currencyRepository.findBySlug("USD");
 
             Account account = Account.create(currency);
             Account account2 = Account.create(currency);
             Account account3 = Account.create(currency);
+            Account account4 = Account.create(currency2);
 
 
             User user = new User();
@@ -94,6 +96,7 @@ public class StartData {
 
             user.addAccount(account);
             user.addAccount(account2);
+            user.addAccount(account4);
 
 
             User admin = new User();
@@ -110,35 +113,20 @@ public class StartData {
             userRepository.save(admin);
             userRepository.flush();
 
+            Account bank = Account.create(currency, "PL00000000000000");
+            Account bank2 = Account.create(currency2, "PL00000000000001");
+            accountRepository.save(bank);
+            accountRepository.save(bank2);
 
-            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "Standardowy przelew"));
-            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "Standardowy przelew"));
+            historyRecordRepository.save(HistoryRecord.create(bank2, account4, (float) 55.10, "Na waciki"));
+            historyRecordRepository.save(HistoryRecord.create(bank, account, (float) 2605.10, "Wypłata październik"));
+            historyRecordRepository.save(HistoryRecord.create(bank, account2, (float) 2400.21, "Wypłata listopad"));
+            historyRecordRepository.save(HistoryRecord.create(bank, account, (float) 2100.30, "Wypłata grudzień"));
+            historyRecordRepository.save(HistoryRecord.create(account, bank, (float) 605.10, "Opłata za prąd"));
             historyRecordRepository.flush();
         }
 
     }
-
-//    private void insertAccounts() {
-//        if (accountRepository.findAll().isEmpty()) {
-//
-//            User user = userRepository.findByUsernameOrEmail("user");
-//            Currency currency = currencyRepository.findBySlug("PLN");
-//
-//            Account account = Account.create(currency);
-//
-//            Currency currency2 = currencyRepository.findBySlug("USD");
-//            Account account2 = Account.create(currency2);
-//
-////            account.addHistoryRecord(HistoryRecord.create(account, account2, (float) 100.00, "test1"));
-////            account.addHistoryRecord(HistoryRecord.create(account2, account, (float) 100.00, "test2"));
-//
-//
-//            accountRepository.save(account2);
-//            accountRepository.save(account);
-//            accountRepository.flush();
-//        }
-//    }
-
 
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

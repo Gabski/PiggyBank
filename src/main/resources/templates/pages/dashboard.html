@@ -2,7 +2,7 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout"
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-
+    <title>Pulpit</title>
 </head>
 <body>
 
@@ -14,46 +14,61 @@
                 <div class="col l6">
                     <h6 class="mb-3">Moje konta</h6>
 
-
                     <div th:each="account:${accountList}" th:object="${account}">
 
                         <div class="card">
-                                <span class="card-title">[[*{account.bankNumber}]]</span>
-                                <div class="card-content">
-                                    <h6>Stan konta: [[*{#numbers.formatDecimal(balance,1,2,'COMMA')}]] [[*{account.currency.slug}]]</h6>
-<!--                                    <a class="btn bg-color-light btn-submit" th:href="@{/account/show(id=*{id})}">Nowy przelew</a>-->
-                                    <a class="btn bg-color-light btn-submit" th:href="@{/transfer/{account}(account=*{account.id})}">Nowy przelew</a>
-                                    <a class="btn bg-color-light btn-submit" th:href="@{account/{account}(account=*{account.id})}">Szczegóły konta</a>
-                                </div>
+                            <span class="card-title">[[*{account.bankNumber}]]</span>
+                            <div class="card-content">
+                                <h6>Stan konta: [[*{#numbers.formatDecimal(balance,1,2,'COMMA')}]]
+                                    [[*{account.currency.slug}]]</h6>
+                                <!--                                    <a class="btn bg-color-light btn-submit" th:href="@{/account/show(id=*{id})}">Nowy przelew</a>-->
+                                <a class="btn bg-color-light btn-submit"
+                                   th:href="@{/transfer/{account}(account=*{account.id})}">Nowy przelew</a>
+                                <a class="btn bg-color-light btn-submit"
+                                   th:href="@{account/{account}(account=*{account.id})}">Szczegóły konta</a>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
                 <div class="col l6">
+
+
+                    <div class="card">
+                        <div class="card-content">
+                            <p>Zalogowany: [[${currentUser.firstName}]] [[${currentUser.lastName}]]</p>
+                            <p>Rola: [[${currentUser.role.roleName}]]</p>
+                        </div>
+                    </div>
+
+
+
                     <h6 class="mb-3">Historia</h6>
                     <div class="card">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Tytuł</th>
-                            <th>Wartość</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <div th:each="history:${historyList}" th:object="${history}">
-
+                        <table class="table table-bordered">
+                            <thead>
                             <tr>
-                                <td>[[*{createAt}]]</td>
-                                <td>[[*{title}]]</td>
-                                <td>[[*{#numbers.formatDecimal(value,1,2,'COMMA')}]]</td>
+                                <th>Data</th>
+                                <th>Tytuł</th>
+                                <th>Wartość</th>
+                                <th>Waluta</th>
                             </tr>
+                            </thead>
 
-                        </div>
-                        </tbody>
-                    </table>
+                            <tbody>
+                            <div th:each="history:${historyList}" th:object="${history}">
+
+                                <tr>
+                                    <td>[[*{createAt}]]</td>
+                                    <td>[[*{title}]]</td>
+                                    <td>[[*{#numbers.formatDecimal(value,1,2,'COMMA')}]]</td>
+                                    <td>[[*{from.currency.slug}]]</td>
+                                </tr>
+
+                            </div>
+                            </tbody>
+                        </table>
                         <div class="card-content">
                             <a href="/history" class="btn btn-primary btn-submit">Zobacz całą historię</a>
                         </div>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout"
       xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Historia transakcji</title>
+    <title>Moje konto</title>
 </head>
 <body>
 <div layout:fragment="breadcrumb">
@@ -19,7 +19,7 @@
                     <div class="form-control">
                         <label>Imie</label>
                         <input type="text" placeholder="np. Andrzej" th:field="*{firstName}" required="true"
-                               pattern="[A-Za-ząęźżśóćńł\s\p{L}]{5,42}" autocomplete="name">
+                               pattern="[A-Za-ząęźżśóćńł\s\p{L}]{2,42}" autocomplete="name">
                         <span class="helper-text wrong" th:if="${#fields.hasErrors('firstName')}"
                               th:each="err : ${#fields.errors('firstName')}"
                               th:text="${err}"></span>

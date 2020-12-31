@@ -25,6 +25,7 @@
                                 <th>Odbiorca</th>
                                 <th>Nazwa</th>
                                 <th>Wartość</th>
+                                <th>Waluta</th>
                             </tr>
                             </thead>
 
@@ -37,6 +38,7 @@
                                     <td>[[*{to.bankNumber}]]</td>
                                     <td>[[*{title}]]</td>
                                     <td>[[*{#numbers.formatDecimal(value,1,2,'COMMA')}]]</td>
+                                    <td>[[*{from.currency.slug}]] </td>
                                 </tr>
 
                             </div>

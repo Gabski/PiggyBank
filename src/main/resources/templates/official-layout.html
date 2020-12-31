@@ -13,6 +13,7 @@
 <div layout:fragment="menu">
   <div th:replace="~{layout/official-nav :: menu}"></div>
 </div>
+<div class="snackbar snack" th:if="${alert}" th:text="${alert.content}"></div>
 
 <div layout:fragment="content"></div>
 

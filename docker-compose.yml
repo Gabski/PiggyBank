@@ -1,0 +1,27 @@
+version: '3.3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  database:
+    container_name:  ${COMPOSE_PROJECT_NAME}-database
+    build:
+      context: ./.docker/mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${MYSQL_TIME_ZONE}
+    volumes:
+      - ./.docker/database:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT}:3306"
+    extra_hosts:
+      - "dockerhost:${APP_IP}"
+    networks:
+        - backend
