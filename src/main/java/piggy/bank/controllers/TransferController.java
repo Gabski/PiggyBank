@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import piggy.bank.adapter.AccountAdapter;
-import piggy.bank.entity.Account;
-import piggy.bank.entity.HistoryRecord;
-import piggy.bank.entity.TransferType;
-import piggy.bank.entity.User;
+import piggy.bank.entity.*;
+import piggy.bank.repository.AccountRepository;
 import piggy.bank.repository.HistoryRecordRepository;
 import piggy.bank.service.AccountService;
 
@@ -26,13 +24,16 @@ public class TransferController extends AppController {
     AccountService accountService;
 
     @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
     HistoryRecordRepository historyRecordRepository;
 
     @GetMapping({"/transfer/{account}"})
     public String home(Model model, @PathVariable Account account) {
 
         var transferType = new TransferType();
-        transferType.setFrom(account.getBankNumber());
+        transferType.setFrom(account);
         transferType.setTitle("Standardowy przelew pieniędzy");
 
         model.addAttribute("account", accountService.getAdapter(account));
@@ -41,16 +42,33 @@ public class TransferController extends AppController {
     }
 
 
-    @PostMapping("/send")
-    public String saveBook(@ModelAttribute("form") @Valid TransferType sendCashType, BindingResult result) {
+    @PostMapping("/transfer/send")
+    public String saveBook(Model model, @ModelAttribute("form") @Valid TransferType transferType, BindingResult result) {
 
+        model.addAttribute("account", accountService.getAdapter(transferType.getFrom()));
 
         if (result.hasErrors()) {
+            model.addAttribute("form", transferType);
             return "pages/cash";
         }
 
-        var account = loadMyAccounts().get(0).getAccount();
-        historyRecordRepository.save(HistoryRecord.create(account, account, sendCashType.getValue(), sendCashType.getTitle()));
+        var accountTo = accountRepository.findByName(transferType.getTo());
+
+        if (accountTo == null) {
+            accountTo = Account.create(transferType.getFrom().getCurrency(), transferType.getTo());
+            accountRepository.saveAndFlush(accountTo);
+        }
+
+        historyRecordRepository.saveAndFlush(HistoryRecord.create(
+                transferType.getFrom(),
+                accountTo,
+                transferType.getValue(),
+                transferType.getTitle())
+        );
+
+
+        model.addAttribute("alert", Snack.create("Wysłano", "Wysłano przelew"));
+        model.addAttribute("form", new TransferType());
         return "pages/cash";
     }
 

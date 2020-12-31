@@ -37,6 +37,14 @@ public class Account implements Serializable {
         return account;
     }
 
+    public static Account create(Currency currency, String bankNumber) {
+        Account account = new Account();
+        account.setCurrency(currency);
+        account.setCreateAt(LocalDate.now());
+        account.setBankNumber(bankNumber);
+        return account;
+    }
+
     public static String randomBankNumber() {
         String start = "PL";
         Random value = new Random();

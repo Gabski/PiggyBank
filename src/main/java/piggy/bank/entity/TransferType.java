@@ -5,8 +5,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -14,11 +13,14 @@ public class TransferType implements Serializable {
 
     private String to;
 
-    private String from;
+    private Account from;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createAt;
 
+    @Min(1)
+    @Max(100000000)
+    @NotNull
     @NumberFormat(pattern = "#.00")
     private Float value;
 
@@ -26,6 +28,7 @@ public class TransferType implements Serializable {
     @NotEmpty
     private String title;
 
+    @Pattern(regexp = "^PL[0-9]{14}$")
     public String getTo() {
         return to;
     }
@@ -34,11 +37,11 @@ public class TransferType implements Serializable {
         this.to = to;
     }
 
-    public String getFrom() {
+    public Account getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(Account from) {
         this.from = from;
     }
 

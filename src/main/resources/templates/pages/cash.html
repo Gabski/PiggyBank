@@ -21,9 +21,9 @@
 
                         <div class="form-control">
                             <label>Z konta</label>
-                            <label th:field="*{from}">
-                                <select>
-                                    <option th:each="single:${myAccounts}" th:value="${account.account.id}">
+                            <label>
+                                <select th:field="*{from}">
+                                    <option th:each="single:${myAccounts}" th:value="${single.account.id}">
                                         [[${single.account.bankNumber}]] ([[${#numbers.formatDecimal(single.balance,1,2,'COMMA')}]] [[${single.account.currency.slug}]])
                                     </option>
                                 </select>
@@ -39,24 +39,28 @@
                                   th:text="${err}"></span>
                         </div>
 
-
-                        <div class="form-control">
-                            <label for="name">Do</label>
-                            <input th:field="*{to}" type="text">
-                            <span class="helper-text wrong" th:if="${#fields.hasErrors('to')}"
-                                  th:each="err : ${#fields.errors('to')}"
-                                  th:text="${err}"></span>
-                        </div>
-
-
                         <div class="form-control">
                             <label for="name">Ile</label>
-                            <input th:field="*{value}" type="number" class="form-input">
+                            <input th:field="*{value}" type="text" class="form-input">
                             <span class="helper-text wrong" th:if="${#fields.hasErrors('value')}"
                                   th:each="err : ${#fields.errors('value')}"
                                   th:text="${err}"></span>
                         </div>
 
+                        <div class="form-control">
+                            <label for="name">Do</label>
+                            <p style="font-size: .5em;">Projekt podpowiada konta gdy wpiszesz np: demo</p>
+                            <input th:field="*{to}" type="text" list="accounts" autocomplete="off">
+                            <span class="helper-text wrong" th:if="${#fields.hasErrors('to')}"
+                                  th:each="err : ${#fields.errors('to')}"
+                                  th:text="${err}"></span>
+                            <datalist id="accounts">
+                                <option value="PL00000000000000">Konto Demo</option>
+                                <option th:each="single:${myAccounts}" th:value="${single.account.bankNumber}">
+                                   Przelew własny do [[${single.account.bankNumber}]] ([[${#numbers.formatDecimal(single.balance,1,2,'COMMA')}]] [[${single.account.currency.slug}]])
+                                </option>
+                            </datalist>
+                        </div>
 
 
                         <button type="submit" class="btn btn-primary btn-submit" value="1">Wyślij przelew</button>

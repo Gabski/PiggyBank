@@ -111,10 +111,8 @@ public class StartData {
             userRepository.flush();
 
 
-            historyRecordRepository.save(HistoryRecord.create(account, account3, (float) 100.02, "test1"));
-            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.20, "test1"));
-            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "test1"));
-            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 1200.00, "test1"));
+            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "Standardowy przelew"));
+            historyRecordRepository.save(HistoryRecord.create(account2, account, (float) 100.00, "Standardowy przelew"));
             historyRecordRepository.flush();
         }
 

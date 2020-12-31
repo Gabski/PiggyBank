@@ -5,6 +5,7 @@ import org.springframework.format.annotation.NumberFormat;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 public class UserEditType implements Serializable {
@@ -26,7 +27,7 @@ public class UserEditType implements Serializable {
     private String phoneNumber;
 
     @NotNull
-    @NumberFormat(style = NumberFormat.Style.NUMBER) @Min(1)
+    @Pattern(regexp = "^[0-9]{11}$")
     private String pesel;
     @NotNull
     @NotEmpty
@@ -42,6 +43,7 @@ public class UserEditType implements Serializable {
 
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "^[0-9]{2}[-][0-9]{3}$")
     private String postalCode;
 
     @NotNull
