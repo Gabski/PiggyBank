@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Panel administratora</title>
+</head>
+<body>
+<div layout:fragment="breadcrumb">
+    <div th:replace="~{layout/breadcrumb :: breadcrumb('/admin/dashboard', 'Admin')}"></div>
+</div>
+
+<div class="hero-unit" layout:fragment="content">
+    <section class="section bg-color-light pt-3 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5>Waluty</h5>
+
+                    <div class="row">
+                        <div class="col l6">
+                            <p class="mb-3">Jako administrator możesz dodać nowe waluty do banku</p>
+                            <div class="card">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Waluta</th>
+                                        <th>Skrót</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <div th:each="currency:${currencyList}" th:object="${currency}">
+
+                                        <tr>
+                                            <td>[[*{name}]]</td>
+                                            <td>[[*{slug}]]</td>
+                                        </tr>
+
+                                    </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    <form method="post" action="/admin/currency/save" class="col m6"
+                          th:object="${currencyType}">
+                        <div class="card">
+                            <div class="card-content">
+
+
+                                <h2 class="h5">Nowa waluta</h2>
+
+                                <div class="form-control">
+                                    <label>Nazwa</label>
+                                    <input type="text" placeholder="np. Frank polski" th:field="*{name}"
+                                           required="true">
+                                    <span class="helper-text wrong" th:if="${#fields.hasErrors('name')}"
+                                          th:each="err : ${#fields.errors('name')}"
+                                          th:text="${err}"></span>
+                                </div>
+                                <div class="form-control">
+                                    <label>Skrót</label>
+                                    <input type="text" placeholder="np. FPL" th:field="*{slug}"
+                                           required="true">
+                                    <span class="helper-text wrong" th:if="${#fields.hasErrors('slug')}"
+                                          th:each="err : ${#fields.errors('slug')}"
+                                          th:text="${err}"></span>
+                                </div>
+
+                                <div>
+                                    <button class="btn btn-primary btn-submit">Zarejestruj walute</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

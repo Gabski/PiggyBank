@@ -17,7 +17,8 @@ public class HistoryController extends AppController {
 
     @GetMapping({"/history"})
     public String show(Model model) {
-    
+
+
         User user = getLoggedUser();
         AccountAdapterCollection accountAdapterList = accountService.getAdaptersList(user.getAccounts());
 

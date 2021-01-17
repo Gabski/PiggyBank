@@ -1,4 +1,4 @@
-<div th:fragment="menu" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="menu" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <nav class="nav js-sticky-nav">
     <a href="/dashboard" class="brand">
         <i class="fas fa-piggy-bank"></i>PIGGYbank
@@ -7,7 +7,7 @@
         <li class="nav-item"><a class="nav-link" href="/dashboard">Pulpit</a></li>
         <li class="nav-item"><a class="nav-link" href="/history">Historia</a></li>
         <li class="nav-item"><a class="nav-link" href="/myaccount">Moje konto</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin/test">Admin test</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/dashboard" sec:authorize="hasRole('ADMIN')">Panel Administratora</a></li>
         <li class="nav-item"><a class="nav-link" href="/logout">Wyloguj</a></li>
        </ul>
 </nav>
@@ -25,7 +25,7 @@
         <li class="nav-item"><a class="nav-link" href="/dashboard">Pulpit</a></li>
         <li class="nav-item"><a class="nav-link" href="/history">Historia</a></li>
         <li class="nav-item"><a class="nav-link" href="/myaccount">Moje konto</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin/test">Admin test</a></li>
+        <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/admin/dashboard">Panel Administratora</a></li>
         <li class="nav-item"><a class="nav-link" href="/logout">Wyloguj</a></li>
     </ul>
 </nav>

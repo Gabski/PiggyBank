@@ -6,12 +6,19 @@
 </head>
 <body>
 
+<div layout:fragment="breadcrumb">
+    <div th:replace="~{layout/breadcrumb :: breadcrumb('/admin/dashboard', 'Admin')}"></div>
+</div>
 <div class="hero-unit" layout:fragment="content">
     <section class="section bg-color-light pt-3 pb-3">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <h5>Panel administratora</h5>
+                    <br>
+                    <a href="/admin/currency" class="btn btn-primary">Zarządzaj walutami</a>
+                    <a href="/admin/accounts" class="btn btn-primary">Przeglądaj konta</a>
+                    <a href="/admin/users" class="btn btn-primary">Przeglądaj użytkowników</a>
                 </div>
             </div>
         </div>

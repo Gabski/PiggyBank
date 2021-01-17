@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Panel administratora</title>
+</head>
+<body>
+
+<div layout:fragment="breadcrumb">
+    <div th:replace="~{layout/breadcrumb :: breadcrumb('/admin/dashboard', 'Admin')}"></div>
+</div>
+<div class="hero-unit" layout:fragment="content">
+    <section class="section bg-color-light pt-3 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h5>Przeglądaj użytkowników</h5>
+
+
+                    <div class="row">
+                        <div class="col l12">
+                            <div class="card">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Imie</th>
+                                        <th>Nazwisko</th>
+                                        <th>Nazwa użytkownika</th>
+                                        <th>Email</th>
+                                        <th>Telefon</th>
+                                        <th>Rola</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <div th:each="user:${userList}" th:object="${user}">
+
+                                        <tr>
+                                            <td>[[*{firstName}]]</td>
+                                            <td>[[*{lastName}]]</td>
+                                            <td>[[*{username}]]</td>
+                                            <td>[[*{email}]]</td>
+                                            <td>[[*{phoneNumber}]]</td>
+                                            <td>[[*{role.roleName}]]</td>
+                                        </tr>
+
+                                    </div>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
