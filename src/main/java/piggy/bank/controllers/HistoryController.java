@@ -21,7 +21,6 @@ public class HistoryController extends AppController {
 
         User user = getLoggedUser();
         AccountAdapterCollection accountAdapterList = accountService.getAdaptersList(user.getAccounts());
-
         model.addAttribute("historyList", accountAdapterList.getAllHistory());
         model.addAttribute("sum",accountAdapterList.getBalance());
         return "pages/history";

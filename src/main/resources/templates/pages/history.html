@@ -10,7 +10,6 @@
 </div>
 <div class="hero-unit" layout:fragment="content">
 
-
     <section class="section bg-color-light pt-3 pb-3">
         <div class="container">
             <div class="row">
@@ -33,12 +32,12 @@
                             <div th:each="history:${historyList}" th:object="${history}">
 
                                 <tr>
-                                    <td>[[*{createAt}]]</td>
+                                    <td>[[*{#dates.format(createAt, 'dd-MM-yyyy HH:mm')}]]</td>
                                     <td>[[*{from.bankNumber}]]</td>
                                     <td>[[*{to.bankNumber}]]</td>
                                     <td>[[*{title}]]</td>
                                     <td>[[*{#numbers.formatDecimal(value,1,2,'COMMA')}]]</td>
-                                    <td>[[*{from.currency.slug}]] </td>
+                                    <td>[[*{from.currency.slug}]]</td>
                                 </tr>
 
                             </div>
@@ -50,6 +49,6 @@
         </div>
     </section>
 
-    </div>
+</div>
 </body>
 </html>

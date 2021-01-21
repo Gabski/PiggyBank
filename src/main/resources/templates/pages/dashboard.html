@@ -60,7 +60,7 @@
                             <div th:each="history:${historyList}" th:object="${history}">
 
                                 <tr>
-                                    <td>[[*{createAt}]]</td>
+                                    <td>[[*{#dates.format(createAt, 'dd-MM-yyyy HH:mm')}]]</td>
                                     <td>[[*{title}]]</td>
                                     <td>[[*{#numbers.formatDecimal(value,1,2,'COMMA')}]]</td>
                                     <td>[[*{from.currency.slug}]]</td>

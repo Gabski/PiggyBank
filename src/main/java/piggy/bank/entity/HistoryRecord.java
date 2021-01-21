@@ -9,6 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Random;
 
 @Entity
@@ -34,7 +36,7 @@ public class HistoryRecord implements Serializable {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
-    private LocalDate createAt;
+    private Date createAt;
 
     @NumberFormat(pattern = "#.00")
     @Column(name = "value")
@@ -51,7 +53,7 @@ public class HistoryRecord implements Serializable {
         historyRecord.setTo(to);
         historyRecord.setValue(value);
         historyRecord.setTitle(title);
-        historyRecord.setCreateAt(LocalDate.now());
+        historyRecord.setCreateAt(new Date());
 
         return historyRecord;
     }
@@ -98,11 +100,11 @@ public class HistoryRecord implements Serializable {
         this.from = from;
     }
 
-    public LocalDate getCreateAt() {
+    public Date getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(LocalDate createAt) {
+    public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 
