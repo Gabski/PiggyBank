@@ -35,16 +35,16 @@ public class RegisterType extends UserEditType {
 
     public static RegisterType create(User user, Currency currency) {
         var userEditType = new RegisterType();
-        userEditType.setFirstName(user.getFirstName());
-        userEditType.setLastName(user.getLastName());
-        userEditType.setPesel(user.getPesel());
-        userEditType.setCity(user.getCity());
+        userEditType.setFirstName(user.getUserDetails().getFirstName());
+        userEditType.setLastName(user.getUserDetails().getLastName());
+        userEditType.setPesel(user.getUserDetails().getPesel());
+        userEditType.setCity(user.getUserDetails().getCity());
         userEditType.setEmail(user.getEmail());
-        userEditType.setStreet(user.getStreet());
-        userEditType.setAddressNumber(user.getAddressNumber());
-        userEditType.setPhoneNumber(user.getPhoneNumber());
-        userEditType.setPostal(user.getPostal());
-        userEditType.setPostalCode(user.getPostalCode());
+        userEditType.setStreet(user.getUserDetails().getStreet());
+        userEditType.setAddressNumber(user.getUserDetails().getAddressNumber());
+        userEditType.setPhoneNumber(user.getUserDetails().getPhoneNumber());
+        userEditType.setPostal(user.getUserDetails().getPostal());
+        userEditType.setPostalCode(user.getUserDetails().getPostalCode());
         userEditType.setCurrency(currency);
         userEditType.setUsername(user.getUsername());
 

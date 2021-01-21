@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import piggy.bank.entity.*;
+import piggy.bank.repository.UserDetailsRepository;
 import piggy.bank.repository.UserRepository;
 import piggy.bank.service.AccountService;
 
@@ -19,6 +20,9 @@ public class AccountController extends AppController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserDetailsRepository userDetailsRepository;
 
     @Autowired
     AccountService accountService;
@@ -42,18 +46,22 @@ public class AccountController extends AppController {
         }
 
         User user = getLoggedUser();
+        UserDetails userDetails = new UserDetails();
 
-        user.setFirstName(userEditType.getFirstName());
-        user.setLastName(userEditType.getLastName());
-        user.setPesel(userEditType.getPesel());
-        user.setCity(userEditType.getCity());
+
+        userDetails.setFirstName(userEditType.getFirstName());
+        userDetails.setLastName(userEditType.getLastName());
+        userDetails.setPesel(userEditType.getPesel());
+        userDetails.setCity(userEditType.getCity());
         user.setEmail(userEditType.getEmail());
-        user.setStreet(userEditType.getStreet());
-        user.setAddressNumber(userEditType.getAddressNumber());
-        user.setPhoneNumber(userEditType.getPhoneNumber());
-        user.setPostal(userEditType.getPostal());
-        user.setPostalCode(userEditType.getPostalCode());
+        userDetails.setStreet(userEditType.getStreet());
+        userDetails.setAddressNumber(userEditType.getAddressNumber());
+        userDetails.setPhoneNumber(userEditType.getPhoneNumber());
+        userDetails.setPostal(userEditType.getPostal());
+        userDetails.setPostalCode(userEditType.getPostalCode());
+        user.setUserDetails(userDetails);
 
+        userDetailsRepository.save(userDetails);
         userRepository.save(user);
         userRepository.flush();
 

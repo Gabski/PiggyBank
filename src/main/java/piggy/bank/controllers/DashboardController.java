@@ -29,7 +29,7 @@ public class DashboardController extends AppController {
         User user = getLoggedUser();
         AccountAdapterCollection accountAdapterList = accountService.getAdaptersList(user.getAccounts());
 
-        model.addAttribute("user", user.getFirstName());
+        model.addAttribute("user", user.getUserDetails().getFirstName());
         model.addAttribute("historyList", accountAdapterList.getAllHistory());
         model.addAttribute("accountList", accountAdapterList.getAccounts());
         return "pages/dashboard";

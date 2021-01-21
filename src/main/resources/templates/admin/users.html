@@ -36,11 +36,11 @@
                                     <div th:each="user:${userList}" th:object="${user}">
 
                                         <tr>
-                                            <td>[[*{firstName}]]</td>
-                                            <td>[[*{lastName}]]</td>
+                                            <td>[[*{userDetails.firstName}]]</td>
+                                            <td>[[*{userDetails.lastName}]]</td>
                                             <td>[[*{username}]]</td>
                                             <td>[[*{email}]]</td>
-                                            <td>[[*{phoneNumber}]]</td>
+                                            <td>[[*{userDetails.phoneNumber}]]</td>
                                             <td>[[*{role.roleName}]]</td>
                                         </tr>
 

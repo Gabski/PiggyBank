@@ -12,12 +12,16 @@ import piggy.bank.domain.AuthorityType;
 import piggy.bank.entity.*;
 import piggy.bank.repository.CurrencyRepository;
 import piggy.bank.repository.RoleRepository;
+import piggy.bank.repository.UserDetailsRepository;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 public class StaticPagesController extends AppController {
+
+    @Autowired
+    UserDetailsRepository userDetailsRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -97,26 +101,29 @@ public class StaticPagesController extends AppController {
 
 
         User user = new User();
+        UserDetails userDetails = new UserDetails();
 
         var dc = new BCryptPasswordEncoder();
         var password = dc.encode(registerType.getPassword());
 
-        user.setFirstName(registerType.getFirstName());
-        user.setLastName(registerType.getLastName());
-        user.setPesel(registerType.getPesel());
-        user.setCity(registerType.getCity());
+        userDetails.setFirstName(registerType.getFirstName());
+        userDetails.setLastName(registerType.getLastName());
+        userDetails.setPesel(registerType.getPesel());
+        userDetails.setCity(registerType.getCity());
         user.setEmail(registerType.getEmail());
-        user.setStreet(registerType.getStreet());
-        user.setAddressNumber(registerType.getAddressNumber());
-        user.setPhoneNumber(registerType.getPhoneNumber());
-        user.setPostal(registerType.getPostal());
-        user.setPostalCode(registerType.getPostalCode());
+        userDetails.setStreet(registerType.getStreet());
+        userDetails.setAddressNumber(registerType.getAddressNumber());
+        userDetails.setPhoneNumber(registerType.getPhoneNumber());
+        userDetails.setPostal(registerType.getPostal());
+        userDetails.setPostalCode(registerType.getPostalCode());
         user.setPassword(password);
         user.setUsername(registerType.getUsername());
         user.setRole(roleRepository.findByName(AuthorityType.ROLE_USER.name()));
 
+        user.setUserDetails(userDetails);
         user.addAccount(Account.create(registerType.getCurrency()));
 
+        userDetailsRepository.save(userDetails);
         userRepository.save(user);
         userRepository.flush();
 

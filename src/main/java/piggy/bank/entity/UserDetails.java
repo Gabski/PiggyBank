@@ -1,66 +1,59 @@
 package piggy.bank.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-public class UserEditType implements Serializable {
+@Entity
+@Table(name = "user_details")
+public class UserDetails implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
     @NotNull
     @NotEmpty
+    @Column(name = "first_name", length = 75)
     private String firstName;
 
     @NotNull
     @NotEmpty
+    @Column(name = "last_name", length = 80)
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    private String email;
-
-    @NotNull
-    @NotEmpty
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @NotNull
-    @Pattern(regexp = "^[0-9]{11}$", message = "Nie poprawny format")
+    @Column(name = "pesel")
     private String pesel;
-    @NotNull
-    @NotEmpty
+
+    @Column(name = "street")
     private String street;
 
-    @NotNull
-    @NotEmpty
+    @Column(name = "city")
     private String city;
 
-    @NotNull
-    @NotEmpty
+    @Column(name = "postal")
     private String postal;
 
-    @NotNull
-    @NotEmpty
-    @Pattern(regexp = "^[0-9]{2}[-][0-9]{3}$", message = "Nie poprawny format")
+    @Column(name = "postal_code")
     private String postalCode;
 
-    @NotNull
-    @NotEmpty
+    @Column(name = "address_number")
     private String addressNumber;
 
-    public static UserEditType create(User user) {
-        var userEditType = new UserEditType();
-        userEditType.setFirstName(user.getUserDetails().getFirstName());
-        userEditType.setLastName(user.getUserDetails().getLastName());
-        userEditType.setPesel(user.getUserDetails().getPesel());
-        userEditType.setCity(user.getUserDetails().getCity());
-        userEditType.setEmail(user.getEmail());
-        userEditType.setStreet(user.getUserDetails().getStreet());
-        userEditType.setAddressNumber(user.getUserDetails().getAddressNumber());
-        userEditType.setPhoneNumber(user.getUserDetails().getPhoneNumber());
-        userEditType.setPostal(user.getUserDetails().getPostal());
-        userEditType.setPostalCode(user.getUserDetails().getPostalCode());
+    public Long getId() {
+        return id;
+    }
 
-        return userEditType;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -77,15 +70,6 @@ public class UserEditType implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhoneNumber() {

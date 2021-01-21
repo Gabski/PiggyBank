@@ -23,6 +23,9 @@ public class StartData {
     private UserRepository userRepository;
 
     @Autowired
+    private UserDetailsRepository userDetailsRepository;
+
+    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
@@ -80,20 +83,24 @@ public class StartData {
 
 
             User user = new User();
+            UserDetails userDetails = new UserDetails();
+            UserDetails adminDetails = new UserDetails();
+
             user.setPassword(bCryptPasswordEncoder().encode("user"));
-            user.setFirstName("Gabriel");
-            user.setLastName("Koziestański");
+            userDetails.setFirstName("Gabriel");
+            userDetails.setLastName("Koziestański");
             user.setEmail("gabriel@wp.pl");
-            user.setPhoneNumber("123412344");
-            user.setCity("Siedlce");
-            user.setPostal("Siedlce");
-            user.setPesel("94022708335");
-            user.setStreet("Polna");
-            user.setAddressNumber("12");
-            user.setPostalCode("01-122");
+            userDetails.setPhoneNumber("123412344");
+            userDetails.setCity("Siedlce");
+            userDetails.setPostal("Siedlce");
+            userDetails.setPesel("94022708335");
+            userDetails.setStreet("Polna");
+            userDetails.setAddressNumber("12");
+            userDetails.setPostalCode("01-122");
             user.setUsername("user");
             user.setRole(roleUser);
 
+            user.setUserDetails(userDetails);
             user.addAccount(account);
             user.addAccount(account2);
             user.addAccount(account4);
@@ -101,13 +108,16 @@ public class StartData {
 
             User admin = new User();
             admin.setPassword(bCryptPasswordEncoder().encode("admin"));
-            admin.setFirstName("Gabriel");
-            admin.setLastName("Koziestański");
+            adminDetails.setFirstName("Gabriel");
+            adminDetails.setLastName("Koziestański");
             admin.setEmail("admin@wp.pl");
             admin.setUsername("admin");
             admin.setRole(roleAdmin);
-
+            admin.setUserDetails(adminDetails);
             admin.addAccount(account3);
+
+            userDetailsRepository.save(userDetails);
+            userDetailsRepository.save(adminDetails);
 
             userRepository.save(user);
             userRepository.save(admin);
